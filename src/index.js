@@ -1,8 +1,9 @@
+//     Name: Tommy Cao
+//     Date: 12/19/19
+//     Description: Todo CRUD React Application with Bootstrap
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));
