@@ -1,14 +1,14 @@
 //     Name: Tommy Cao
 //     Date: 12/19/19
-//     Description: Todo React Application
+//     Description: Todo CRUD React Application with Bootstrap
+
 import React, { Component } from 'react';
-import uuid from 'uuid';
 
 class AddProject extends Component {
   constructor(){
     super();
     this.state = {
-      newProject:{}
+      newTodo:{}
     }
   }
 
@@ -20,15 +20,14 @@ class AddProject extends Component {
     if(this.refs.title.value === ''){
       alert('Title is required');
     } else {
-      this.setState({newProject:{
-        id: uuid.v4(),
+      this.setState({newTodo:{
         title: this.refs.title.value,
         priority: this.refs.priority.value
       }}, function(){
-        //console.log(this.state);
-        this.props.addProject(this.state.newProject);
+        this.props.addTodo(this.state.newTodo);
       });
     }
+    this.refs.title.value = ''; // clear input title field
     e.preventDefault();
   }
 
@@ -39,29 +38,14 @@ class AddProject extends Component {
     return (
       <div>
         <h3>Add Todo</h3>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div>
-            <label>Title</label><br />
-            <input type="text" ref="title" />
-          </div>
-          <div>
-            <label>Priority</label><br />
-            <select ref="priority">
-              {priorityOptions}
-            </select>
-          </div>
-          <br />
-          <input type="submit" value="Submit" />
-          <br />
+        <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
+                <input className="form-control form-control-lg" type="text" ref="title" />
+                <span><select className="form-control form-control-lg" ref="priority">{priorityOptions}</select></span>
+                <input className="btn btn-success" type="submit" value="Add" />
         </form>
       </div>
     );
   }
-}
-
-AddProject.propTypes = {
-  priorities: React.PropTypes.array,
-  addProject: React.PropTypes.func
 }
 
 export default AddProject;

@@ -1,111 +1,71 @@
 //     Name: Tommy Cao
 //     Date: 12/19/19
-//     Description: Todo React Application
+//     Description: Todo CRUD React Application with Bootstrap
+
 import React, { Component } from 'react';
-import uuid from 'uuid';
-
-let dialogStyles = {
-    width: '500px',
-    maxWidth: '100%',
-    margin: '0 auto',
-    position: 'fixed',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%,-50%)',
-    zIndex: '999',
-    backgroundColor: '#eee',
-    padding: '10px 20px 40px',
-    borderRadius: '8px',
-    display: 'flex',
-    flexDirection: 'column'
-};
-
-let dialogCloseButtonStyles = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontWeight: 'bold',
-    alignSelf: 'flex-end'
-};
-
 
 class Dialog extends Component {
-    constructor(){
-        super();
+    constructor(props) {
+        super(props);
+        this.handleSave = this.handleSave.bind(this);
         this.state = {
-          newProject:{}
+            title: '',
+            priority: '',
         }
-      }
+    }
+
     
-      static defaultProps = {
-        priorities: ['High', 'Medium', 'Low']
-      }
-    
-      handleSubmit(e){
-        if(this.refs.title.value === ''){
-          alert('Title is required');
-        } else {
-          this.setState({newProject:{
-            id: uuid.v4(),
-            title: this.refs.title.value,
-            priority: this.refs.priority.value
-          }}, function(){
-            console.log(this.state);
-            this.props.addProject(this.state.newProject);
-          });
-        }
-        e.preventDefault();
-      }
-    
-      render() {
-        let priorityOptions = this.props.priorities.map(priority => {
-          return <option key={priority} value={priority}>{priority}</option>
+  static defaultProps = {
+    priorities: ['High', 'Medium', 'low']
+  }
+  
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            title: nextProps.title,
+            priority: nextProps.priority,
         });
+    }
 
-        let dialog = (
-            <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={this.props.onClose}>X</button>
+    titleHandler(e) {
+        this.setState({ title: e.target.value });
+    }
 
-                <div>
-                    <h3>Add Todo</h3>
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <div>
-                            <label>Title</label><br />
-                            <input type="text" ref="title" />
+    priorityHandler(e) {
+        this.setState({ priority: e.target.value });
+    }
+
+    handleSave() {
+        const item = this.state;
+        this.props.saveModalDetails(item)
+    }
+
+    render() {
+        let priorityOptions = this.props.priorities.map(priority => {
+            return <option key={priority} value={priority}>{priority}</option>
+          });        
+        return (
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Edit Todo</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div>
-                            <label>Priority</label><br />
-                            <select ref="priority">
-                            {priorityOptions}
-                            </select>
+                        <div className="modal-body">
+                            <p><span className="modal-lable">Title:</span><input value={this.state.title} onChange={(e) => this.titleHandler(e)} /></p>
+                            <p><span className="modal-lable">Priority:</span><select  value={this.state.priority} onChange={(e) => this.priorityHandler(e)}>{priorityOptions}></select> </p>
                         </div>
-                        <br />
-                        <input type="submit" value="Submit" />
-                        <br />
-                    </form>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => { this.handleSave() }}>Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
-
-        if (! this.props.isOpen) {
-            dialog = null;
-        }
-
-        return (
-            <div>
-                {dialog}
-            </div>
-        );
-      }
+    }
 }
-
-Dialog.propTypes = {
-    priorities: React.PropTypes.array,
-    addProject: React.PropTypes.func
-  }
 
 export default Dialog;
