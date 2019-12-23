@@ -1,6 +1,6 @@
 //     Name: Tommy Cao
 //     Date: 12/19/19
-//     Description: Todo CRUD React Application with Bootstrap
+//     Description: Todo React Application with Bootstrap
 
 import React, { Component } from 'react';
 
@@ -58,8 +58,8 @@ class Dialog extends Component {
                             <p><span className="modal-lable">Priority:</span><select  value={this.state.priority} onChange={(e) => this.priorityHandler(e)}>{priorityOptions}></select> </p>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => { this.handleSave() }}>Save changes</button>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

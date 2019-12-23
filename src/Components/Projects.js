@@ -1,6 +1,6 @@
 //     Name: Tommy Cao
 //     Date: 12/19/19
-//     Description: Todo CRUD React Application with Bootstrap
+//     Description: Todo React Application with Bootstrap
 
 import React, { Component } from 'react';
 import Dialog from './Dialog';
@@ -80,15 +80,15 @@ class Projects extends Component {
 
     const todos = this.state.todos.map((item, index) => {
       return (
-        <tr key={index}>
-          <td>{item.title}</td>
-          <td>{item.priority}</td>
-          <td>
-            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-              onClick={() => this.replaceModalItem(index)}>edit</button> {" "}
-            <button className="btn btn-danger" onClick={() => this.deleteItem(index)}>remove</button>
-          </td>
-        </tr>
+          <tr key={index}>
+            <td>{item.title}</td>
+            <td>{item.priority}</td>
+            <td>
+              <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                onClick={() => this.replaceModalItem(index)}>Edit</button> {" "}
+              <button className="btn btn-danger" onClick={() => this.deleteItem(index)}>Remove</button>
+            </td>
+          </tr>
       )
     });
     
@@ -98,9 +98,11 @@ class Projects extends Component {
     return (
       <div className="container">
         <div  style={{ textAlign: "center" }}>
-          <h1>Todo CRUD React App</h1>
+          <h1>Todo React App</h1>
+          <br />
         </div>
         <AddProject addTodo={this.handleAddTodo.bind(this)} />
+        <br />
         <table className="table table-striped">
           <tbody>
             {todos}
