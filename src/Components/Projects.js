@@ -38,7 +38,7 @@ class Projects extends Component {
         {
           title: 'Buy milk',
           priority: 'low'
-        }     
+        } 
       ]
     }
   }
@@ -80,15 +80,15 @@ class Projects extends Component {
 
     const todos = this.state.todos.map((item, index) => {
       return (
-          <tr key={index}>
-            <td>{item.title}</td>
-            <td>{item.priority}</td>
-            <td>
-              <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                onClick={() => this.replaceModalItem(index)}>Edit</button> {" "}
-              <button className="btn btn-danger" onClick={() => this.deleteItem(index)}>Remove</button>
-            </td>
-          </tr>
+      <tr key={index}> {/* without key, there's warning */}
+          <td>{item.title}</td>
+          <td>{item.priority}</td>
+          <td>
+            <button className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              onClick={() => this.replaceModalItem(index)}>Edit</button> {" "}
+            <button className="btn btn-danger" onClick={() => this.deleteItem(index)}>Remove</button>
+          </td>
+      </tr>
       )
     });
     
@@ -103,11 +103,20 @@ class Projects extends Component {
         </div>
         <AddProject addTodo={this.handleAddTodo.bind(this)} />
         <br />
+      <div>
         <table className="table table-striped">
+          <thead>
+            <tr>
+              <th stylename="width: 60%">Title</th>
+              <th stylename="width: 15">Priority</th>
+              <th stylename="width: 25%"></th>
+            </tr>
+          </thead>
           <tbody>
             {todos}
           </tbody>
         </table> 
+      </div>
         <Dialog
           title={modalData.title}
           priority={modalData.priority}

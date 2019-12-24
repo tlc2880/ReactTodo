@@ -8,9 +8,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class AddProject extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        newTodo:{modal: false, title: '', priority :''}
-      }
+    this.state = {
+      newTodo:{modal: false, title: '', priority :''}
+    }
 
     this.toggle = this.toggle.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -72,7 +72,7 @@ class AddProject extends Component {
             <div className="form-group col-md-3">
               <label>Priority:</label>
               <select className="form-control" ref="priority" onChange={this.handleChangePriority}>{priorityOptions}</select>                 
-              </div>
+            </div>
           </div>
           </ModalBody>
           <ModalFooter>

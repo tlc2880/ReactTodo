@@ -15,9 +15,9 @@ class Dialog extends Component {
     }
 
     
-  static defaultProps = {
-    priorities: ['High', 'Medium', 'low']
-  }
+    static defaultProps = {
+        priorities: ['High', 'Medium', 'low']
+    }
   
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -54,8 +54,8 @@ class Dialog extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <p><span className="modal-lable">Title:</span><input value={this.state.title} onChange={(e) => this.titleHandler(e)} /></p>
-                            <p><span className="modal-lable">Priority:</span><select  value={this.state.priority} onChange={(e) => this.priorityHandler(e)}>{priorityOptions}></select> </p>
+                            <p><span className="modal-lable">Title: </span><input value={this.state.title} onChange={(e) => this.titleHandler(e)} /></p>
+                            <p><span className="modal-lable">Priority: </span><select  value={this.state.priority} onChange={(e) => this.priorityHandler(e)}>{priorityOptions}></select> </p>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={() => { this.handleSave() }}>Save changes</button>
