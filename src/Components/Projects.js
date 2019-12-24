@@ -80,7 +80,7 @@ class Projects extends Component {
 
     const todos = this.state.todos.map((item, index) => {
       return (
-      <tr key={index}> {/* without key, there's warning */}
+      <tr key={index}>
           <td>{item.title}</td>
           <td>{item.priority}</td>
           <td>
